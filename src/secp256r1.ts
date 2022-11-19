@@ -1,5 +1,5 @@
 import BN from 'bn.js';
-import { createHash } from 'crypto';
+import RNQuickCrypto from 'react-native-quick-crypto';
 import * as elliptic from 'elliptic';
 
 import * as messages from './messages.json';
@@ -215,7 +215,7 @@ export function recover(message: Buffer, signature: Buffer, recovery: number, co
 
 export function ecdh(publicKey: Buffer, privateKey: Buffer) {
   var shared = exports.ecdhUnsafe(publicKey, privateKey, true);
-  return createHash('sha256')
+  return RNQuickCrypto.createHash('sha256')
     .update(shared)
     .digest();
 }
