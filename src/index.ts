@@ -1,9 +1,10 @@
 import * as assert from 'assert';
 import * as bs58check from 'bs58check';
-import * as crypto from 'crypto';
+import RNQuickCrypto from 'react-native-quick-crypto';
+import { Buffer as RNBuffer } from '@craftzdog/react-native-buffer'
 import * as secp256r1 from './secp256r1';
 
-const MASTER_SECRET = Buffer.from('Nist256p1 seed', 'utf8');
+const MASTER_SECRET = RNBuffer.from('Nist256p1 seed', 'utf8');
 const LEN = 78;
 
 interface Version {
@@ -23,10 +24,10 @@ export class HDKey {
   static HARDENED_OFFSET = 0x80000000;
 
   static fromMasterSeed(seedBuffer: Buffer, versions?: Version) {
-    var I = crypto
+    var I = RNQuickCrypto
       .createHmac('sha512', MASTER_SECRET)
-      .update(seedBuffer)
-      .digest();
+      .update(seedBuffer as unknown as RNBuffer)
+      .digest() as unknown as Buffer;
     var IL = I.slice(0, 32);
     var IR = I.slice(32);
 
@@ -203,10 +204,10 @@ export class HDKey {
       data = Buffer.concat([this.publicKey!, indexBuffer]);
     }
 
-    const I = crypto
+    const I = RNQuickCrypto
       .createHmac('sha512', this.chainCode)
-      .update(data)
-      .digest();
+      .update(RNBuffer.from(data))
+      .digest() as unknown as Buffer;
     const IL = I.slice(0, 32);
     const IR = I.slice(32);
 
@@ -277,12 +278,12 @@ function serialize(hdkey: HDKey, version: number, key: Buffer) {
 }
 
 function hash160(buf: Buffer) {
-  var sha = crypto
+  var sha = RNQuickCrypto
     .createHash('sha256')
-    .update(buf)
+    .update(buf.toString('hex'))
     .digest();
-  return crypto
+  return RNQuickCrypto
     .createHash('rmd160')
-    .update(sha)
-    .digest();
+    .update(sha.toString('hex'))
+    .digest() as unknown as Buffer;
 }
