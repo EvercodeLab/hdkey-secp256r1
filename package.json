@@ -1,12 +1,16 @@
 {
-  "name": "hdkey-secp256r1",
+  "name": "@evercode/react-native-hdkey-secp256r1",
   "version": "1.1.0",
-  "description": "BIP32 hierarchical deterministic keys using secp256r1 curve",
+  "description": "BIP32 hierarchical deterministic keys using secp256r1 curve for React Native",
   "main": "./lib/index.js",
   "types": "./lib/types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git://github.com/backslash47/hdkey-secp256r1"
+    "url": "git://github.com/EvercodeLab/react-native-hdkey-secp256r1"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://storage.evercodelab.com/repository/npm/"
   },
   "license": "MIT",
   "keywords": [
@@ -32,9 +36,9 @@
     "testRegex": "/test/.*\\.test\\.(ts|tsx|js)$"
   },
   "bugs": {
-    "url": "https://github.com/backslash47/hdkey-secp256r1/issues"
+    "url": "https://github.com/EvercodeLab/react-native-hdkey-secp256r1/issues"
   },
-  "homepage": "https://github.com/backslash47/hdkey-secp256r1",
+  "homepage": "https://github.com/EvercodeLab/react-native-hdkey-secp256r1",
   "devDependencies": {
     "@types/bigi": "^1.4.2",
     "@types/ecurve": "^1.0.0",
